@@ -5,7 +5,7 @@ class CommentBox extends React.Component {
   render() {
     return (
       <div className="comment-box">
-        <h1>Comments</h1>
+        <h1 className="comment-box__title">Comments</h1>
         <CommentList />
         <CommentForm />
       </div>
@@ -16,7 +16,7 @@ class CommentBox extends React.Component {
 class CommentList extends React.Component {
   render () {
     return (
-      <div className="comment-list">
+      <div className="comment-box__list">
         Hello, world! I am a Commentlist.
       </div>
     )
@@ -26,7 +26,7 @@ class CommentList extends React.Component {
 class CommentForm extends React.Component {
   render () {
     return (
-      <div className="comment-form">
+      <div className="comment-box__form">
         Hello, world! I am a Commentform.
       </div>
     )
