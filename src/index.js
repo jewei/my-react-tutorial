@@ -36,13 +36,18 @@ class CommentForm extends React.Component {
 }
 
 class Comment extends React.Component {
+  rawMarkup () {
+    let rawMarkup = marked(this.props.children.toString(), {sanitise: true})
+    return { __html: rawMarkup }
+  }
+
   render () {
     return (
       <div className="comment-box__comment">
         <h2 className="comment-box__author">
           {this.props.author}
         </h2>
-        {marked(this.props.children.toString())}
+        <span dangerouslySetInnerHTML={this.rawMarkup()} />
       </div>
     )
   }
