@@ -7,7 +7,6 @@ class CommentBox extends Component {
   constructor(props) {
     super(props)
     this.state = {data: []}
-    this.handleCommentSubmit = this.handleCommentSubmit.bind(this)
   }
 
   loadCommentsFromServer() {
@@ -58,7 +57,7 @@ class CommentBox extends Component {
       <div className="comment-box">
         <h1 className="comment-box__title">Comments</h1>
         <CommentList data={this.state.data} />
-        <CommentForm onCommentSubmit={this.handleCommentSubmit} />
+        <CommentForm onCommentSubmit={::this.handleCommentSubmit} />
       </div>
     )
   }
@@ -88,9 +87,6 @@ class CommentForm extends Component {
   constructor(props) {
     super(props)
     this.state = {author: '', text: ''}
-    this.handleAuthorChange = this.handleAuthorChange.bind(this)
-    this.handleTextChange = this.handleTextChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleAuthorChange(e) {
@@ -114,18 +110,18 @@ class CommentForm extends Component {
 
   render () {
     return (
-      <form className="comment-box__form" onSubmit={this.handleSubmit}>
+      <form className="comment-box__form" onSubmit={::this.handleSubmit}>
         <input
           type="text"
           placeholder="Your name"
           value={this.state.author}
-          onChange={this.handleAuthorChange}
+          onChange={::this.handleAuthorChange}
         />
         <input
           type="text"
           placeholder="Say something..."
           value={this.state.text}
-          onChange={this.handleTextChange}
+          onChange={::this.handleTextChange}
         />
         <input type="submit" value="Post" />
       </form>
