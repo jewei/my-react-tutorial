@@ -63,25 +63,11 @@ class CommentBox extends Component {
   }
 }
 
-class CommentList extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  render() {
-    let commentNodes = this.props.data.map((comment) => (
-      <Comment author={comment.author} key={comment.id}>
-        {comment.text}
-      </Comment>
-    ))
-
-    return (
-      <div className="comment-box__list">
-        {commentNodes}
-      </div>
-    )
-  }
-}
+const CommentList = props => (
+  <div className="comment-box__list">
+    { props.data.map(comment => <Comment key={comment.id} author={comment.author} text={comment.text} />) }
+  </div>
+)
 
 class CommentForm extends Component {
   constructor(props) {
@@ -129,9 +115,9 @@ class CommentForm extends Component {
   }
 }
 
-class Comment extends React.Component {
+class Comment extends Component {
   rawMarkup () {
-    let rawMarkup = marked(this.props.children.toString(), {sanitise: true})
+    let rawMarkup = marked(this.props.text.toString(), {sanitise: true})
     return { __html: rawMarkup }
   }
 
