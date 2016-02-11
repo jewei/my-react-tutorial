@@ -63,7 +63,7 @@ class CommentBox extends Component {
   }
 }
 
-const CommentList = props => (
+const CommentList = (props) => (
   <div className="comment-box__list">
     { props.data.map(comment => <Comment key={comment.id} author={comment.author} text={comment.text} />) }
   </div>
@@ -115,23 +115,14 @@ class CommentForm extends Component {
   }
 }
 
-class Comment extends Component {
-  rawMarkup () {
-    let rawMarkup = marked(this.props.text.toString(), {sanitise: true})
-    return { __html: rawMarkup }
-  }
-
-  render () {
-    return (
-      <div className="comment-box__comment">
-        <h2 className="comment-box__author">
-          {this.props.author}
-        </h2>
-        <span dangerouslySetInnerHTML={this.rawMarkup()} />
-      </div>
-    )
-  }
-}
+const Comment = (props) => (
+  <div className="comment-box__comment">
+    <h2 className="comment-box__author">
+      {props.author}
+    </h2>
+    <span dangerouslySetInnerHTML={{ __html: marked(props.text.toString(), {sanitise: true}) }} />
+  </div>
+)
 
 ReactDOM.render(
   <CommentBox url="/api/comments" />,
